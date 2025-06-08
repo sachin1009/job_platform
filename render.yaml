@@ -19,8 +19,8 @@ services:
     name: job-platform-frontend
     env: node
     rootDir: . # Points to the root of your repository
-    buildCommand: npm install && npm run build
-    startCommand: npm start
+    buildCommand: pnpm install --frozen-lockfile && pnpm run build
+    startCommand: pnpm start
     ports:
       - 3000 # Default Next.js port
     envVars:
