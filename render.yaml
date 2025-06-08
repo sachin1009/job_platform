@@ -6,8 +6,6 @@ services:
     rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
-    ports:
-      - 10000 # Make sure this matches the --port in your startCommand
     envVars:
       - key: ADZUNA_APP_ID # Example, replace with your actual keys if not hardcoded
         value: "478e2d58" # Replace with your Adzuna App ID
@@ -21,8 +19,6 @@ services:
     rootDir: . # Points to the root of your repository
     buildCommand: pnpm install --frozen-lockfile && pnpm run build
     startCommand: pnpm start
-    ports:
-      - 3000 # Default Next.js port
     envVars:
       - key: NEXT_PUBLIC_API_URL # This will be set manually in Render dashboard after backend is deployed
         value: "" # Leave empty for now, will be populated on Render after backend deployment
