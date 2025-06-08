@@ -24,12 +24,8 @@ services:
     ports:
       - 3000 # Default Next.js port
     envVars:
-      - key: NEXT_PUBLIC_API_URL
-        # Value will be the URL of your deployed backend service.
-        # Render will automatically link internal services, but for cross-service HTTP calls,
-        # you might need to set this after the backend is deployed,
-        # or use Render's internal service discovery (if you set up an internal service).
-        # For simplicity, you can initially leave it blank and set it in the Render UI
-        # after the backend is live, or use Render's service linking (see below).
-        # A common practice is to use Render's internal service discovery:
-        value: http://job-platform-backend.onrender.com # Use your backend service's internal hostname for direct communication 
+      - key: NEXT_PUBLIC_API_URL # This will be set manually in Render dashboard after backend is deployed
+        value: "" # Leave empty for now, will be populated on Render after backend deployment
+
+  # A common practice is to use Render's internal service discovery:
+  # value: http://job-platform-backend.onrender.com # Use your backend service's internal hostname for direct communication 
