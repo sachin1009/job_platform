@@ -1,0 +1,35 @@
+services:
+  # FastAPI Backend Service
+  - type: web
+    name: job-platform-backend
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
+    ports:
+      - 10000 # Make sure this matches the --port in your startCommand
+    envVars:
+      - key: ADZUNA_APP_ID # Example, replace with your actual keys if not hardcoded
+        value: "478e2d58" # Replace with your Adzuna App ID
+      - key: ADZUNA_API_KEY # Example, replace with your actual keys if not hardcoded
+        value: "003d6ccef719aec08d8442a7555c1060" # Replace with your Adzuna API Key
+
+  # Next.js Frontend Service
+  - type: web
+    name: job-platform-frontend
+    env: node
+    rootDir: . # Points to the root of your repository
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    ports:
+      - 3000 # Default Next.js port
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        # Value will be the URL of your deployed backend service.
+        # Render will automatically link internal services, but for cross-service HTTP calls,
+        # you might need to set this after the backend is deployed,
+        # or use Render's internal service discovery (if you set up an internal service).
+        # For simplicity, you can initially leave it blank and set it in the Render UI
+        # after the backend is live, or use Render's service linking (see below).
+        # A common practice is to use Render's internal service discovery:
+        value: http://job-platform-backend.onrender.com # Use your backend service's internal hostname for direct communication 
